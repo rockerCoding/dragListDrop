@@ -3,6 +3,8 @@ import React from 'react'
 import { styles } from './styles'
 import Animated, { useAnimatedGestureHandler, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import {
+  Gesture,
+  GestureDetector,
   GestureHandlerRootView,
   PanGestureHandler,
   PanGestureHandlerGestureEvent,
@@ -15,11 +17,11 @@ const DragListItemRender = ({ item }) => {
 
   const panGestureEvent = useAnimatedGestureHandler({
     onStart: (event, context) => {
-      context.translateX = translateX.value;
+      //context.translateX = translateX.value;
       context.translateY = translateY.value;
     },
     onActive: (event, context) => {
-      translateX.value = event.translationX + context.translateX;
+      //translateX.value = event.translationX + context.translateX;
       translateY.value = event.translationY + context.translateY;
     },
     onEnd: () => {
@@ -46,10 +48,20 @@ const DragListItemRender = ({ item }) => {
   });
 
 
+  /* const longPressGesture = Gesture.LongPress().onEnd((e, success) => {
+    if(e.duration > 500)
+    if (success) {
+      console.log(`Long pressed for ${e.duration} ms!`);
+    }
+  }); */
+  
+      {/* <GestureDetector  gesture={longPressGesture}>
+        <View style={{width: 20, height: 20, backgroundColor: 'red'}} />
+      </GestureDetector> */}
 
-
+  const longPressGesture = Gesture.LongPress().onStart((e) => console.log(e))
   return (
-    <PanGestureHandler onGestureEvent={panGestureEvent}>
+    <GestureDetector gesture={longPressGesture}>
       <Animated.View style={[styles.animatedContainer, rStyle]}>
         <View style={styles.container}>
           <View style={styles.titleContainer}>
@@ -61,7 +73,7 @@ const DragListItemRender = ({ item }) => {
 
         </View>
       </Animated.View>
-    </PanGestureHandler >
+    </GestureDetector >
   )
 }
 

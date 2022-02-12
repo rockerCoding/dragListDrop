@@ -3,11 +3,11 @@ import React from 'react'
 
 import { styles } from './styles'
 import DragListItemRender from '../DragListItemRender'
-import { GestureHandlerRootView } from 'react-native-gesture-handler'
+
 
 const DragList = ({ data }) => {
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+
       <View style={styles.container}>
         {
           data.map((item) => {
@@ -17,7 +17,7 @@ const DragList = ({ data }) => {
           })
         }
       </View>
-    </GestureHandlerRootView>
+
   )
 }
 
